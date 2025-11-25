@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "938518505122",
+    "project_id": "hanotyapp-2025",
+    "storage_bucket": "hanotyapp-2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938518505122:android:b96c8c2d61819e88fc59fb",
+        "android_client_info": {
+          "package_name": "com.example.hanotyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2q_FaenghjEKHdqPdOpaZ_TTlz5k69VY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
