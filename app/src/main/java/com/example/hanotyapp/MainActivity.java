@@ -1,24 +1,41 @@
 package com.example.hanotyapp;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.hanotyapp.model.Product;
+import com.example.hanotyapp.ui.product.ProductAdapter;
+import com.example.hanotyapp.viewmodel.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ProductViewModel productViewModel;
+    private ProductAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        RecyclerView recyclerView = findViewById(R.id.rvProducts);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ProductAdapter();
+        recyclerView.setAdapter(adapter);
+
+        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+        productViewModel.getAllProducts().observe(this, products -> adapter.setProducts(products));
+
+        Button btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(v -> {
+            // Exemple d'ajout de produit
+            Product product = new Product("Produit Demo", 10.0, 5);
+            productViewModel.insert(product);
         });
     }
 }
