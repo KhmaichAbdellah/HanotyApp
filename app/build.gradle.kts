@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
+    // Kotlin serialization plugin for type safe routes and navigation arguments
+    kotlin("plugin.serialization") version "2.0.21"
 
 }
 
@@ -35,6 +37,14 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.firebase.auth)
+    val nav_version = "2.9.6"
+
+    // Views/Fragments integration
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
     // Material Components
     implementation("com.google.android.material:material:1.9.0")
     // Glide

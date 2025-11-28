@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HanotyApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="creer_un_compte">Créer un compte</string>
+    <string name="compte_deja_cree">J’ai déjà un compte</string>
 </resources>
