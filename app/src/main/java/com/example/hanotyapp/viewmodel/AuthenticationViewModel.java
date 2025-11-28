@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.hanotyapp.data.repository.AuthenticationRepository;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseUser;
 
 public class AuthenticationViewModel extends AndroidViewModel {
@@ -39,4 +40,9 @@ public class AuthenticationViewModel extends AndroidViewModel {
     public void signOut(){
         repository.signOut();
     }
+
+    public void signInWithGoogle(GoogleSignInAccount account){
+        repository.firebaseAuthWithGoogle(account);
+    }
+
 }

@@ -1,35 +1,43 @@
 package com.example.hanotyapp.ui.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.example.hanotyapp.R;
 import com.example.hanotyapp.viewmodel.AuthenticationViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseUser;
 
-import javax.annotation.Nullable;
-
 
 public class SignInFragment extends Fragment {
 
+    private static final int RC_SIGN_IN = 100;
     private TextInputEditText emailEdit, passEdit;
     private MaterialButton signInBtn, signUpBtn, googleSignInBtn;
     private TextView forgotPassword;
     private AuthenticationViewModel viewModel;
     private NavController navController;
+
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,14 +74,21 @@ public class SignInFragment extends Fragment {
         forgotPassword = view.findViewById(R.id.forgotPassword);
         navController = Navigation.findNavController(view);
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
+        // Configurer Google Sign-In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_signInFragment_to_signUpFragment);
             }
         });
 
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
+        signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emailEdit.getText().toString();
@@ -85,5 +100,27 @@ public class SignInFragment extends Fragment {
             }
         });
 
+        googleSignInBtn.setOnClickListener(v -> signInWithGoogle());
+    }
+
+    private void signInWithGoogle() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RC_SIGN_IN) {
+            try {
+                GoogleSignInAccount account = GoogleSignIn.getSignedInAccountFromIntent(data).getResult(ApiException.class);
+                if(account != null) {
+                    viewModel.signInWithGoogle(account);
+                }
+            } catch (ApiException e) {
+                Toast.makeText(getContext(), "Google sign-in failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

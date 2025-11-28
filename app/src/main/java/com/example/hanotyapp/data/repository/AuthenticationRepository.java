@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -18,6 +19,7 @@ public class AuthenticationRepository{
     private MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
     private MutableLiveData<Boolean> userLoggedMutableLiveData;
     private FirebaseAuth auth;
+    GoogleSignInAccount googleSignInAccount;
 
     public MutableLiveData<Boolean> getUserLoggedMutableLiveData() {
         return userLoggedMutableLiveData;
@@ -45,7 +47,7 @@ public class AuthenticationRepository{
                 if (task.isSuccessful()){
                     firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
                 }else{
-                    Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -58,7 +60,7 @@ public class AuthenticationRepository{
                 if (task.isSuccessful()){
                     firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
                 }else{
-                    Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -68,5 +70,27 @@ public class AuthenticationRepository{
         auth.signOut();
         userLoggedMutableLiveData.postValue(true);
     }
+
+    public void firebaseAuthWithGoogle(GoogleSignInAccount account){
+        if(account == null) return;
+
+        // Récupère le token ID du compte Google
+        String idToken = account.getIdToken();
+        if(idToken == null) return;
+
+        // Crée les credentials Firebase à partir du token Google
+        com.google.firebase.auth.AuthCredential credential =
+                com.google.firebase.auth.GoogleAuthProvider.getCredential(idToken, null);
+
+        // Authentifie avec Firebase
+        auth.signInWithCredential(credential).addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
+            } else {
+                Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
 }

@@ -39,6 +39,14 @@ android {
 dependencies {
 
     implementation(libs.firebase.auth)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
+    // Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.1")
+
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
     val nav_version = "2.9.6"
 
     // Views/Fragments integration
@@ -48,8 +56,7 @@ dependencies {
     // Material Components
     implementation("com.google.android.material:material:1.9.0")
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // pour Java
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 
     // ZXing (Barcode / QR code)
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
