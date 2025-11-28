@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     // Add the Google services Gradle plugin
     id("com.google.gms.google-services")
+    // Kotlin serialization plugin for type safe routes and navigation arguments
+    kotlin("plugin.serialization") version "2.0.21"
 
 }
 
@@ -35,11 +37,26 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.firebase.auth)
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services.auth)
+    implementation(libs.googleid)
+    // Firebase Auth
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.1")
+
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    val nav_version = "2.9.6"
+
+    // Views/Fragments integration
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
     // Material Components
     implementation("com.google.android.material:material:1.9.0")
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1") // pour Java
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 
     // ZXing (Barcode / QR code)
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
