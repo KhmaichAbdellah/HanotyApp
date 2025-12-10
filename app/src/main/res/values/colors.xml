@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="hanouty_green">#22C55E</color>
+    <color name="hanouty_background">#F3F4F6</color>
+    <color name="hanouty_text_primary">#1F2937</color>
+    <color name="hanouty_text_secondary">#6B7280</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FF9800</color>
     <color name="bleu">#3d6d99</color>
+    <color name="terracotta">#ce542c</color>
+    <color name="royal">#1a4c89</color>
+    <color name="background_cream">#fcfaf7</color>
+    <color name="text_dark">#2b241c</color>
 </resources>

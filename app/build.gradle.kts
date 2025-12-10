@@ -46,7 +46,8 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.1.1")
 
     // Google Sign-In
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.android.gms:play-services-auth:21.4.0")
+    implementation(libs.firebase.database)
     val nav_version = "2.9.6"
 
     // Views/Fragments integration
@@ -54,7 +55,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:$nav_version")
 
     // Material Components
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.13.0")
     // Glide
     implementation("com.github.bumptech.glide:glide:5.0.5")
 

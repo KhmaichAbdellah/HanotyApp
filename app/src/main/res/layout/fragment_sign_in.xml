@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/background_cream"
     tools:context=".ui.auth.SignInFragment">
 
     <!-- Titre Login -->
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Bienvenue"
-        android:textColor="@color/black"
+        android:textColor="@color/text_dark"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@id/logoImage" />
 
     <LinearLayout
-        android:id="@+id/emailContainer"
+        android:id="@+id/phoneContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -47,29 +47,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Champ email -->
+        <!-- Champ phone -->
         <ImageView
-            android:id="@+id/emailIcon"
+            android:id="@+id/phoneIcon"
             android:layout_width="47dp"
             android:layout_height="61dp"
+            android:padding="12dp"
             android:layout_marginEnd="0dp"
-            android:contentDescription="Icône Email"
-            android:src="@drawable/ic_email_resized" />
+            android:contentDescription="Icône Téléphone"
+            android:src="@drawable/ic_phone_vector"
+            app:tint="@color/royal"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailLayout"
+            android:id="@+id/phoneLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            app:boxStrokeColor="@color/bleu"
-            app:hintTextColor="@color/bleu"
+            android:hint="Numéro de téléphone"
+            app:boxStrokeColor="@color/royal"
+            app:hintTextColor="@color/royal"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailEditText"
+                android:id="@+id/phoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,7 +85,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="33dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/emailContainer"
+        app:layout_constraintTop_toBottomOf="@id/phoneContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="0dp">
@@ -95,7 +97,8 @@
             android:layout_height="61dp"
             android:layout_marginEnd="0dp"
             android:contentDescription="Icône mot de passe"
-            android:src="@drawable/ic_password_resized" />
+            android:src="@drawable/ic_password_resized"
+            app:tint="@color/royal"/>
 
         <!-- Champ mot de passe -->
         <com.google.android.material.textfield.TextInputLayout
@@ -104,8 +107,8 @@
             android:layout_height="wrap_content"
             android:hint="Mot de passe"
             app:endIconMode="password_toggle"
-            app:boxStrokeColor="@color/bleu"
-            app:hintTextColor="@color/bleu"
+            app:boxStrokeColor="@color/royal"
+            app:hintTextColor="@color/royal"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -127,7 +130,7 @@
         android:layout_marginStart="107dp"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="107dp"
-        android:backgroundTint="@color/bleu"
+        android:backgroundTint="@color/royal"
         android:text="CONNEXION"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
@@ -142,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Mot de passe oublié ?"
-        android:textColor="@color/black"
+        android:textColor="@color/text_dark"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/passwordContainer"
         tools:layout_editor_absoluteX="243dp"
@@ -158,9 +161,9 @@
         android:backgroundTint="@color/white"
         android:text="INSCRIPTION"
         app:strokeWidth="1dp"
-        app:strokeColor="#66000000"
+        app:strokeColor="@color/royal"
         android:textAllCaps="false"
-        android:textColor="@color/bleu"
+        android:textColor="@color/royal"
         app:cornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -217,7 +220,7 @@
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:cornerRadius="12dp"
-        app:icon="@drawable/chercher"
+        app:icon="@drawable/google"
         app:iconGravity="textStart"
         app:iconPadding="10dp"
         app:iconTint="@null"

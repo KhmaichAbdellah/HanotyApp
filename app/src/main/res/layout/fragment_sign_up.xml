@@ -221,7 +221,7 @@
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:cornerRadius="12dp"
-        app:icon="@drawable/chercher"
+        app:icon="@drawable/google"
         app:iconGravity="textStart"
         app:iconPadding="10dp"
         app:iconTint="@null"
